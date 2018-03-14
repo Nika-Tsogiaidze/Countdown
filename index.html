@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown timer on d3.js</title>
+	<style>
+		svg {
+	        	transform: rotate(-90deg);
+			background: #f1d0d0;
+		}
+	</style>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <svg width="200" height="200">
+        <circle id="circle" cx="100" cy="100" r="94" fill="none" stroke="#f77a52" stroke-width="12" stroke-dasharray="600" stroke-dashoffset="0" />
+    </svg>
+<script>
+  	var circumference = 2 * Math.PI * d3.select("#circle").attr("r");
+	var stepInSecond = circumference / 60;
+	setInterval(function (){
+		currentOffset =	d3.select("#circle").attr("stroke-dashoffset");
+		if(parseFloat(currentOffset) + parseFloat(circumference) <= 0) { currentOffset = 0; }
+		d3.select("#circle").transition().duration(1000).attr("stroke-dashoffset", currentOffset - stepInSecond);
+	}, 1000);
+</script>
+</body>
+</html>
