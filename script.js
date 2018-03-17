@@ -23,14 +23,21 @@ function updateSeconds(){
 }
 
 function calculateAndSetStrokeValues(second, minute, hour){
+	setSecondMinuteHours(second, minute, hour);
 	seconds = Number(secondsCircumference) - Number(second * secondsStepLength);
 	minutes = Number(minutesCircumference) - Number(minute * minutesStepLength);
 	hours = Number(hoursCircumference) - Number(hour * hoursStepLength);
 	setStrokeDashoffsets(seconds, minutes, hours);
 }
 
+function setSecondMinuteHours(second, minute, hour){
+	second = second;
+	minute = minute;
+	hour = hour;
+}
+
 function setStrokeDashoffsets(seconds, minutes, hours){
-	d3.select("#secondsCircle").attr("stroke-dashoffset", seconds);
+	d3.select("#secondsCircle").transition().duration(2000).attr("stroke-dashoffset", seconds);
 	d3.select("#minutesCircle").transition().duration(2000).attr("stroke-dashoffset", minutes);
 	d3.select("#hoursCircle").transition().duration(2000).attr("stroke-dashoffset", hours);
 }
